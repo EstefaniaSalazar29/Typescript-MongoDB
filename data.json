@@ -1,0 +1,9 @@
+[
+    { "name": "Sin ti", "gender": "reggaeton", "listeners": "1.500" },
+    { "name": "Sin ti", "gender": "reggaeton", "listeners": "1.500" },
+    { "name": "Mar",  "gender": "Salsa",  "listeners": "2.000"},
+    { "name": "Verano",  "gender": "Romantica",  "listeners": "50.000"},
+    { "name": "Hawai",  "gender": "reggaeton",  "listeners": "8.000"},
+    { "name": "Love",  "gender": "reggaeton",  "listeners": "45.000"},
+    {  "name": "Sol",  "gender": "Salsa",  "listeners": "100.000"}
+]
