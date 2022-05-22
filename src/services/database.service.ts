@@ -32,8 +32,7 @@ export async function connectToDatabase() {
     );
 }
 
-// Update our existing collection with JSON schema validation so we know our documents will always match the shape of our Game model, even if added elsewhere.
-// For more information about schema validation, see this blog series: https://www.mongodb.com/blog/post/json-schema-validation--locking-down-your-model-the-smart-way
+
 // async function applySchemaValidation(db: mongoDB.Db) {
 //     const jsonSchema = {
 //         $jsonSchema: {
