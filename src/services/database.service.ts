@@ -19,7 +19,7 @@ export async function connectToDatabase() {
     const db = client.db(process.env.DB_NAME);
     
     // Apply schema validation to the collection
-    // await applySchemaValidation(db);
+    await applySchemaValidation(db);
 
     // Connect to the collection with the specific name from .env, found in the database previously specified
     const usuariosCollection = db.collection<Usuarios>(process.env.ALBUMS_COLLECTION_NAME);
@@ -33,37 +33,37 @@ export async function connectToDatabase() {
 }
 
 
-// async function applySchemaValidation(db: mongoDB.Db) {
-//     const jsonSchema = {
-//         $jsonSchema: {
-//             bsonType: "object",
-//             required: ["name", "price", "category"],
-//             additionalProperties: false,
-//             properties: {
-//                 _id: {},
-//                 name: {
-//                     bsonType: "string",
-//                     description: "'name' is required and is a string",
-//                 },
-//                 gender: {
-//                     bsonType: "string",
-//                     description: "'price' is required and is a string",
-//                 },
-//                 listeners: {
-//                     bsonType: "number",
-//                     description: "'category' is required and is a number",
-//                 },
-//             },
-//         },
-//     };
+async function applySchemaValidation(db: mongoDB.Db) {
+    const jsonSchema = {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "gender", "listeners"],
+            additionalProperties: false,
+            properties: {
+                _id: {},
+                name: {
+                    bsonType: "string",
+                    description: "'name' is required and is a string",
+                },
+                gender: {
+                    bsonType: "string",
+                    description: "'price' is required and is a string",
+                },
+                listeners: {
+                    bsonType: "number",
+                    description: "'category' is required and is a number",
+                },
+            },
+        },
+    };
 
-//     // Try applying the modification to the collection, if the collection doesn't exist, create it 
-//    await db.command({
-//         collMod: process.env.ALBUMS_COLLECTION_NAME,
-//         validator: jsonSchema
-//     }).catch(async (error: mongoDB.MongoServerError) => {
-//         if (error.codeName === 'NamespaceNotFound') {
-//             await db.createCollection(process.env.ALBUMS_COLLECTION_NAME, {validator: jsonSchema});
-//         }
-//     });
-// }
+    // Try applying the modification to the collection, if the collection doesn't exist, create it 
+   await db.command({
+        collMod: process.env.ALBUMS_COLLECTION_NAME,
+        validator: jsonSchema
+    }).catch(async (error: mongoDB.MongoServerError) => {
+        if (error.codeName === 'NamespaceNotFound') {
+            await db.createCollection(process.env.ALBUMS_COLLECTION_NAME, {validator: jsonSchema});
+        }
+    });
+}
